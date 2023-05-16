@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+ 
+  <script>
+    function createAccount() {
+      var username = document.getElementById("create-username").value;
+      var password = document.getElementById("create-password").value;
+
+      // Read the existing JSON data from localStorage or initialize an empty array
+      var users = JSON.parse(localStorage.getItem("users")) || [];
+
+      // Check if the username already exists
+      var existingUser = users.find(function(user) {
+        return user.username === username;
+      });
+
+      if (existingUser) {
+        alert("Username already exists. Please choose a different username.");
+        return;
+      }
+
+      // Create a new user object
+      var newUser = {
+        username: username,
+        password: password
+      };
+
+      // Add the new user to the array
+      users.push(newUser);
+
+      // Save the updated array to localStorage
+      localStorage.setItem("users", JSON.stringify(users));
+
+      alert("Account created successfully!");
+      clearCreateForm();
+    }
+  </script>
+  
+</head>
+<body>
+  <div class="container">
+   
+
+    <div class="form-container">
+      <h2>Create Account</h2>
+      <form>
+        <label for="create-username">Username:</label>
+        <input type="text" id="create-username" required>
+
+        <label for="create-password">Password:</label>
+        <input type="password" id="create-password" required>
+
+        <button type="button" onclick="createAccount()" class="btn btn-success">Create Account</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

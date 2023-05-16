@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <style>
+        .container{
+          text-align: center; 
+          background-image: url(assets/download\ \(2\).jpg);
+          height: 700px;
+         
+        }
+        button{
+            margin-top: 300px;
+            height: 30px;
+        }
+    </style>
+    <script>
+        function create(){
+            window.location="http://127.0.0.1:5500/create.html"
+        }
+        function log(){
+            window.location="http://127.0.0.1:5500/login.html"
+        }
+    </script>
+</head>
+<body>
+    <div class="container">       
+    <button onclick="create()">Create Account</button>
+    <button onclick="log()">Login</button>
+</div>
+</body>
+</html>

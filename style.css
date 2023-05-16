@@ -1,0 +1,13 @@
+body {
+
+    background-color: #ffffff;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+.form-container{
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  display: inline-block;
+  border:2px solid black;
+padding: 10px;
+}
