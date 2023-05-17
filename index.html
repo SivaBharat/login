@@ -5,31 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
-        .container{
-          text-align: center; 
-          background-image: url(assets/download\ \(2\).jpg);
-          height: 700px;
-         
+        body {
+          background-color: #f8f9fa;
         }
-        button{
-            margin-top: 300px;
-            height: 30px;
+
+        .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+
+        .btn-container {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
         }
     </style>
     <script>
         function create(){
-            window.location="http://127.0.0.1:5500/create.html"
+            window.location="http://127.0.0.1:5500/create.html";
         }
         function log(){
-            window.location="http://127.0.0.1:5500/login.html"
+            window.location="http://127.0.0.1:5500/login.html";
         }
     </script>
 </head>
 <body>
-    <div class="container">       
-    <button onclick="create()">Create Account</button>
-    <button onclick="log()">Login</button>
-</div>
+    <div class="container">
+        <div class="btn-container">
+            <button onclick="create()" class="btn btn-primary">Create Account</button>
+            <button onclick="log()" class="btn btn-primary">Login</button>
+        </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
