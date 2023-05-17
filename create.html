@@ -55,7 +55,7 @@
     function createAccount() {
       var username = document.getElementById("create-username").value;
       var password = document.getElementById("create-password").value;
-
+      var confirm=document.getElementById("create-confirmpassword").value;
       // Read the existing JSON data from localStorage or initialize an empty array
       var users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -68,7 +68,10 @@
         alert("Username already exists. Please choose a different username.");
         return;
       }
-
+      if (password !== confirm) {
+    alert("Passwords do not match. Please enter matching passwords.");
+    return;
+  }
       // Create a new user object
       var newUser = {
         username: username,
@@ -101,6 +104,11 @@
           <label for="create-password" class="form-label">Password:</label>
           <input type="password" id="create-password" required class="form-control">
         </div>
+        <div class="mb-3">
+          <label for="create-password" class="form-label">Confirm Password:</label>
+          <input type="password" id="create-confirmpassword" required class="form-control">
+        </div>
+
 
         <button type="button" onclick="createAccount()" class="btn btn-success">Create Account</button>
       </form>
