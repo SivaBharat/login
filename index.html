@@ -5,13 +5,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App</title>
+  <title>AVIS</title>
   <link rel="icon" type="image/x-icon" href="assets/download.jpg">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <style>
     body {
-      background-image: url(assets/pexels-pixabay-531880.jpg);
-     
+      background-color: #555;
     }
 
     .container {
@@ -30,25 +29,40 @@
 
     /* Navbar styles */
     .navbar {
-     
       padding: 10px;
       text-align: center;
-      
     }
-a{
-  color: rgb(242, 6, 6);
-}
+
     .navbar li {
       display: inline-block;
       margin-right: 10px;
     }
+
     /* Footer styles */
     footer {
-     
       padding: 20px;
       text-align: center;
       margin-top: -80px;
       font-size: 12px;
+    }
+a{
+  color: antiquewhite;
+}
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        margin-top: 0;
+        height: auto;
+      }
+
+      .btn-container {
+        margin-top: 40px;
+      }
+
+      footer {
+        margin-top: 40px;
+      }
     }
   </style>
   <script>
@@ -65,28 +79,28 @@ a{
 <body>
   <!-- Navbar -->
   <div class="container">
-  <nav class="navbar">
-    <ul>
-      <li><a href="#">Meta</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Blog</a></li>
-      <li><a href="#">Jobs</a></li>
-      <li><a href="#">Help</a></li>
-      <li><a href="#">API</a></li>
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Terms</a></li>
-      <li><a href="#">Top Accounts</a></li>
-      <li><a href="#">Locations</a></li>
-      <li><a href="#">Instagram Lite</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Meta Verified</a></li>
-    </ul>
-  </nav>
-</div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="#">Meta</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Help</a></li>
+        <li><a href="#">API</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Top Accounts</a></li>
+        <li><a href="#">Locations</a></li>
+        <li><a href="#">Instagram Lite</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Meta Verified</a></li>
+      </ul>
+    </nav>
+  </div>
   <!-- Content -->
   <div class="container">
     <div class="btn-container">
-      <h1>Welcome to the App</h1>
+      <h1 style="color: beige;">Welcome to the AVIS</h1>
       <p style="color: beige;">Create an account or log in to get started</p>
       <button onclick="create()" class="btn btn-primary">Create Account</button>
       <button onclick="log()" class="btn btn-primary">Login</button>
