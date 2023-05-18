@@ -10,24 +10,45 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <style>
     body {
-      background-color: #f8f9fa;
-      background: -webkit-linear-gradient(to right, #dcd0cf, #e0d6d6);
-      /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to right, #f2d5d4, #d5cccc);
-      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background-image: url(assets/pexels-pixabay-531880.jpg);
+     
     }
 
     .container {
+      margin-top: -265px;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: 90vh;
     }
 
     .btn-container {
       display: flex;
       flex-direction: column;
       gap: 20px;
+    }
+
+    /* Navbar styles */
+    .navbar {
+     
+      padding: 10px;
+      text-align: center;
+      
+    }
+a{
+  color: rgb(242, 6, 6);
+}
+    .navbar li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    /* Footer styles */
+    footer {
+     
+      padding: 20px;
+      text-align: center;
+      margin-top: -80px;
+      font-size: 12px;
     }
   </style>
   <script>
@@ -42,17 +63,47 @@
 </head>
 
 <body>
+  <!-- Navbar -->
+  <div class="container">
+  <nav class="navbar">
+    <ul>
+      <li><a href="#">Meta</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Jobs</a></li>
+      <li><a href="#">Help</a></li>
+      <li><a href="#">API</a></li>
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Top Accounts</a></li>
+      <li><a href="#">Locations</a></li>
+      <li><a href="#">Instagram Lite</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Meta Verified</a></li>
+    </ul>
+  </nav>
+</div>
+  <!-- Content -->
   <div class="container">
     <div class="btn-container">
+      <h1>Welcome to the App</h1>
+      <p style="color: beige;">Create an account or log in to get started</p>
       <button onclick="create()" class="btn btn-primary">Create Account</button>
       <button onclick="log()" class="btn btn-primary">Login</button>
       <div>
-        <p>Advertisement</p>
-        <a href="#"><img src="assets/c5Rp7Ym-Klz.png" alt="" width="150px"></a>
-        <a href="#"><img src="assets/EHY6QnZYdNX.png" alt="" width="125px"></a>
+        <p style="color: antiquewhite;">Advertisement</p>
+        <a href="https://play.google.com/store/apps?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-in-1003227-med-hasem-ap-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700064490253544_creativeid_480915691381_device_c&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3Bo3O4EVWF-UwgBdjNcCzw1onNQ_RnY9q3ZWtEn1wvWUeh2CVQYEkBoC8p0QAvD_BwE&gclsrc=aw.ds&pli=1"><img
+            src="assets/c5Rp7Ym-Klz.png" alt="Google Play" width="200px"></a>
+        <a href="https://www.microsoft.com/en-in"><img src="assets/EHY6QnZYdNX.png" alt="Microsoft" width="160px"></a>
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <p style="color: antiquewhite;">&copy; 2023 Your Company. All rights reserved.</p>
+  </footer>
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 

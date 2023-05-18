@@ -7,9 +7,9 @@
   <style>
     body {
       background-color: #f8f9fa;
-      background: #ffffff;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #dcd0cf, #e0d6d6);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #f2d5d4, #d5cccc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: #ffffff;
+      background: -webkit-linear-gradient(to right, #dcd0cf, #e0d6d6);
+      background: linear-gradient(to right, #f2d5d4, #d5cccc);
     }
 
     .container {
@@ -49,18 +49,47 @@
       width: 100%;
       padding: 10px;
     }
+
+    footer {
+      background-color: #f8f9fa;
+      padding: 20px;
+      text-align: center;
+      margin-top: -80px;
+    }
   </style>
- 
   <script>
     function createAccount() {
       var username = document.getElementById("create-username").value;
       var password = document.getElementById("create-password").value;
-      var confirm=document.getElementById("create-confirmpassword").value;
+      var confirm = document.getElementById("create-confirmpassword").value;
+      var usernameRegex = /^[a-zA-Z0-9]+$/; // Regular expression for alphanumeric characters
+      var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#])[A-Za-z\d@$#]{6,15}$/;
+      if (username === "") {
+        alert("Username is required.");
+        return;
+      }
+      if (!username.match(usernameRegex)) {
+        alert("Username must contain only alphanumeric characters.");
+        return;
+      }
+      if (password === "") {
+        alert("Password is required.");
+        return;
+      }
+      if(!password.match(passRegex)){
+        alert("Password must be at least 6 characters long and contain a combination of special characters.");
+        return;
+      }
+      if (password !== confirm) {
+        alert("Passwords do not match. Please enter matching passwords.");
+        return;
+      }
+
       // Read the existing JSON data from localStorage or initialize an empty array
       var users = JSON.parse(localStorage.getItem("users")) || [];
 
       // Check if the username already exists
-      var existingUser = users.find(function(user) {
+      var existingUser = users.find(function (user) {
         return user.username === username;
       });
 
@@ -68,10 +97,7 @@
         alert("Username already exists. Please choose a different username.");
         return;
       }
-      if (password !== confirm) {
-    alert("Passwords do not match. Please enter matching passwords.");
-    return;
-  }
+
       // Create a new user object
       var newUser = {
         username: username,
@@ -87,8 +113,15 @@
       alert("Account created successfully!");
       clearCreateForm();
     }
+
+    function clearCreateForm() {
+      document
+
+.getElementById("create-username").value = "";
+      document.getElementById("create-password").value = "";
+      document.getElementById("create-confirmpassword").value = "";
+    }
   </script>
-  
 </head>
 <body>
   <div class="container">
@@ -109,10 +142,12 @@
           <input type="password" id="create-confirmpassword" required class="form-control">
         </div>
 
-
         <button type="button" onclick="createAccount()" class="btn btn-success">Create Account</button>
       </form>
     </div>
   </div>
+  <footer>
+    <p>&copy; 2023 Your Company. All rights reserved.</p>
+  </footer>
 </body>
 </html>
