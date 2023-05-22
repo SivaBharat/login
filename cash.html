@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carousel with Buy Button</title>
-    <!-- Include the SweetAlert library -->
+    <!-- Include the SweetAlert library links-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -162,7 +162,7 @@
           text-align: center;
         }
 
-        /* Responsive styles */
+        /* Media queries*/
         @media screen and (max-width: 768px) {
           .products {
             justify-content: flex-start;
@@ -198,7 +198,7 @@
 
     </style>
 </head>
-<body>
+<body><!--Header-->
     <header>
         <nav>
             <h2><i class="fas fa-campground"></i> AVIS</h2>
@@ -211,6 +211,7 @@
           <a href="http://127.0.0.1:5500/login.html" class="cta-btn">Sign Out</a>
         </nav>
     </header>
+    <!--Content for carousel-->
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -232,8 +233,8 @@
             <span class="visually-hidden">Next</span>
         </a>
     </div>
-
     <a href="#" class="buy-btn">Buy Now</a>
+    <!--Cards-->
     <section class="products">
         <div class="product-card">
           <img src="assets/shoe1.jpg" alt="Product 1">
@@ -305,7 +306,8 @@
       <div class="container">
         <a href="http://127.0.0.1:5500/app.html"><button class="btn btn-info">&larr; Previous</button></a>
         <a href="http://127.0.0.1:5500/appsecond.html"><button class="btn btn-info">Next &rarr;</button></a>
-      </div> 
+      </div>
+      <!--Footer--> 
 <footer>
     <p>&copy; 2023 Your Company. All rights reserved.</p>
 </footer>
@@ -320,7 +322,7 @@
         buyButton.addEventListener('click', function(event) {
             event.preventDefault();
 
-            // Show the payment options using Swal dialog
+            // Show the payment options using Swal dialog box
             Swal.fire({
                 title: 'Select Payment Method',
                 icon: 'question',
@@ -345,7 +347,7 @@
                     const selectedOption = result.value;
 
                     if (selectedOption === 'gpay') {
-                        // Show additional inputs for IFSC code and payment amount
+                        // Show inputs for IFSC code and payment amount
                         Swal.fire({
                             title: 'Payment Details',
                             html:
@@ -380,9 +382,6 @@
                             if (paymentResult.isConfirmed) {
                                 const ifscCode = paymentResult.value.ifscCode;
                                 const paymentAmount = paymentResult.value.paymentAmount;
-
-                                // Perform the payment process with ifscCode and paymentAmount
-                                // ...
                                 // Display success message
                                 Swal.fire({
                                     title: 'Order Placed',
@@ -397,8 +396,6 @@
                             }
                         });
                     } else if (selectedOption === 'cod') {
-                        // Perform the payment process for Cash on Delivery
-                        // ...
                         // Display success message
                         Swal.fire({
                             title: 'Order Placed',

@@ -57,7 +57,7 @@
       margin-top: -80px;
     }
 
-    /* Responsive styles */
+    /* Media queries*/
     @media (max-width: 768px) {
       .form-container {
         width: 100%;
@@ -69,7 +69,8 @@
       var username = document.getElementById("create-username").value;
       var password = document.getElementById("create-password").value;
       var confirm = document.getElementById("create-confirmpassword").value;
-      var usernameRegex = /^[a-zA-Z0-9]+$/; // Regular expression for alphanumeric characters
+      // Regular expression 
+      var usernameRegex = /^[a-zA-Z0-9]+$/; 
       var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#])[A-Za-z\d@$#]{6,15}$/;
       if (username === "") {
         alert("Username is required.");
@@ -130,6 +131,7 @@
   </script>
 </head>
 <body>
+  <!--Input box-->
   <div class="container">
     <div class="form-container">
       <h2>Create Account</h2>
@@ -152,6 +154,7 @@
       </form>
     </div>
   </div>
+  <!--Footer-->
   <footer>
     <p style="color: floralwhite;">&copy; 2023 Your Company. All rights reserved.</p>
   </footer>
