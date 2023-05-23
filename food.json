@@ -1,0 +1,61 @@
+{
+  "food": [
+    {
+      "FoodName": "Poori",
+      "FoodType": "Veg",
+      "Category": "SouthIndian",
+      "AvailableTime": "07:00",
+      "Cost": "05.00",
+      "image": "https://lh4.ggpht.com/-aCEJWGEJ020/UpWAPaaJWiI/AAAAAAAAW8U/SQTRpemQkCU/s72-c/poori-recipe_thumb1.jpg?imgmax=600",
+      "id": 1
+    },
+    {
+      "FoodName": "Idly",
+      "FoodType": "Veg",
+      "Category": "SouthIndian",
+      "AvailableTime": "07:00",
+      "Cost": "05.00",
+      "image": "https://www.healthifyme.com/blog/wp-content/uploads/2018/03/idly2.jpeg",
+      "id": 2
+    },
+    {
+      "FoodName": "Meals",
+      "FoodType": "Veg",
+      "Category": "SouthIndian",
+      "AvailableTime": "12:30",
+      "Cost": "70.00",
+      "image": "https://th.bing.com/th/id/R.efb364090421d2100ccbe6867388899f?rik=mO5X65GTv3OWkQ&riu=http%3a%2f%2fwww.southindianfoods.in%2frecipe_picture_enlarge%2fandhra_plaintainleaf_meals.jpg&ehk=TYlUSn2UkbUYTyG266K9hr5cetuX8Wx52uw4%2fNdqVuw%3d&risl=&pid=ImgRaw&r=0",
+      "id": 3
+    },
+    {
+      "FoodName": "Parotta",
+      "FoodType": "Non-Veg",
+      "Category": "SouthIndian",
+      "AvailableTime": "19:00",
+      "Cost": "15.00",
+      "image": "https://farm9.staticflickr.com/8586/16023214373_90552b64f6_o.jpg",
+      "id": 4
+    },
+    {
+      "FoodName": "Noodles",
+      "FoodType": "Veg",
+      "Category": "Chinesh",
+      "AvailableTime": "19:00",
+      "Cost": "90.00",
+      "image": "https://tse2.mm.bing.net/th/id/OIP.C3Ep0grJrP7VQASs-3ocnwHaFY?pid=ImgDet&rs=1",
+      "id": 5
+    },
+    {
+      "id": 7
+    },
+    {
+      "FoodName": "Vennila",
+      "FoodType": "IceCreams",
+      "Category": "NorthIndian",
+      "AvailableTime": "15:00",
+      "Cost": "35.00",
+      "image": "https://tse1.mm.bing.net/th/id/OIP.QQSgajg-pPq0g4v30sf8WwHaHr?pid=ImgDet&rs=1",
+      "id": 8
+    }
+  ]
+}

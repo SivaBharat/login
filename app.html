@@ -1,27 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="assets/camp.png">
-    <title>AVIS</title>
-    <style>
-        /* Basic styling for header, navigation, product cards, footer, etc. */
-        
-        body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 0;
-        }
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <title>AVIS</title>
+  <link rel="icon" type="image/x-icon" href="assets/camp.png">
+  <style>
+       body {
+      font-size: 1.25rem;
+      background-color: #555;
+    }
+
+    h2 {
+      color: #ffffff;
+    }
+
+    .card {
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .card-text {
+      margin-bottom: 5px;
+    }
+
+    .btn-edit {
+      margin-right: 5px;
+    }
+
+    .btn-delete {
+      color: #dc3545;
+    }
+    footer {
+          background-color: #333;
+          color: #fff;
+          padding: 20px;
+          text-align: center;
+        }
         header {
           background-color: #333;
           color: #fff;
           padding: 20px;
         }
-
+        
         nav {
           display: flex;
           justify-content: space-between;
@@ -56,90 +102,6 @@
           border-radius: 5px;
           text-decoration: none;
         }
-
-        main {
-          padding: 40px;
-          text-align: center;
-        }
-
-        .products {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          margin-top: 40px;
-        }
-
-        .product-card {
-          background-color: #f5f5f5;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          padding: 20px;
-          text-align: center;
-          margin-bottom: 20px;
-          flex-basis: 300px;
-        }
-
-        .product-card img {
-          width: 200px;
-          height: 200px;
-          object-fit: cover;
-          border-radius: 5px;
-          margin-bottom: 10px;
-        }
-
-        .product-card h3 {
-          font-size: 20px;
-          margin-bottom: 10px;
-        }
-
-        .product-card p {
-          margin-bottom: 10px;
-        }
-
-        .product-card .btn {
-          display: inline-block;
-          background-color: #333;
-          color: #fff;
-          padding: 10px 20px;
-          text-decoration: none;
-          border-radius: 5px;
-          transition: background-color 0.3s ease;
-        }
-
-        .product-card .btn:hover {
-          background-color: #555;
-        }
-
-        footer {
-          background-color: #333;
-          color: #fff;
-          padding: 20px;
-          text-align: center;
-        }
-
-        /* Media queries */
-        @media screen and (max-width: 768px) {
-          .products {
-            justify-content: flex-start;
-          }
-
-          .product-card {
-            flex-basis: calc(50% - 20px);
-          }
-        }
-
-        @media screen and (max-width: 480px) {
-          .product-card {
-            flex-basis: 100%;
-          }
-        }
-
-        /* Hover effect */
-        .product-card:hover {
-          transform: scale(1.05);
-          background-color: #555;
-          color: #fff;
-        }
         .container {
   text-align: center;
 }
@@ -151,99 +113,290 @@
   margin-bottom: 10px;
 }
 
-    </style>    
+  </style>
+  <script>
+    function loadTable(FoodName = '') {
+      const xhttp = new XMLHttpRequest();
+      xhttp.open("GET", `http://localhost:3000/food?FoodName_like=${FoodName}`);
+      xhttp.send();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+          var cardHTML = "";
+          const objects = JSON.parse(this.responseText);
+          for (let object of objects) {
+            cardHTML += '<div class="col-md-4">';
+            cardHTML += '<div class="card">';
+            cardHTML += '<img src="' + object["image"] + '" class="card-img-top" alt="Food Image">';
+            cardHTML += '<div class="card-body">';
+            cardHTML += '<h5 class="card-title">' + object["FoodName"] + '</h5>';
+            cardHTML += '<p class="card-text">Type: ' + object["FoodType"] + '</p>';
+            cardHTML += '<p class="card-text">Category: ' + object["Category"] + '</p>';
+            cardHTML += '<p class="card-text">Available Time: ' + object["AvailableTime"] + '</p>';
+            cardHTML += '<p class="card-text">Cost: ' + object["Cost"] + '</p>';
+            cardHTML += '<button type="button" class="btn btn-outline-primary me-2" onclick="showUserEditBox(' + object[
+              "id"] + ')"><i class="fa-regular fa-pen-to-square"></i> Edit</button>';
+            cardHTML += '<button type="button" class="btn btn-outline-danger" onclick="userDelete(' + object[
+              "id"] + ')"><i class="fa-solid fa-trash"></i> Delete</button>';
+            cardHTML += '</div>';
+            cardHTML += '</div>';
+            cardHTML += '</div>';
+          }
+          document.getElementById("mycards").innerHTML = cardHTML;
+        }
+      };
+    }
+
+    loadTable();
+
+    // searching
+    function search() {
+      const FoodName = document.getElementById("searchvalue").value;
+      loadTable(FoodName);
+    }
+
+    //Create box 
+    function showUserCreateBox() {
+  Swal.fire({
+    title: "Add Food",
+    html:
+      '<input id="id" type="hidden">' +
+      '<label>FoodName</label><input id="FoodName" class="col-xs-2" placeholder=""><br><br>' + 
+      '<label>FoodType</label><select name="country" id="FoodType" style="width:160px"><option value="Veg">Veg</option><option value="Non-Veg">Non-Veg</option><option value="IceCreams">IceCreams</option><option value="Snacks">Snacks</option><option value="other">other</option></select><br><br>'+
+      '<label>Category</label><select name="country" id="Category" style="width:160px"><option value="SouthIndian">SouthIndian</option><option value="NorthIndian">NorthIndian</option><option value="Chinesh">Chinesh</option><option value="French">French</option><option value="other">other</option></select><br>'+
+      '<br><label>AvailableTime</label><br><input id="AvailableTime" class="swal2-input" type="time">' +      
+      '<br><br><label>Cost</label><input id="Cost" class="col-xs-2" placeholder="">',
+    preConfirm: () => {
+        userCreate();
+    },
+  });
+}
+
+function userCreate() {
+  const FoodName = document.getElementById("FoodName").value;
+  const FoodType = document.getElementById("FoodType").value;
+  const Category = document.getElementById("Category").value;
+  const AvailableTime = document.getElementById("AvailableTime").value;  
+  const Cost = document.getElementById("Cost").value;
+
+  if(validate()==true){
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "http://localhost:3000/food");
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(
+    JSON.stringify({
+      FoodName: FoodName,
+      FoodType: FoodType,
+      Category: Category,
+      AvailableTime: AvailableTime,      
+      Cost:Cost,
+      image: "https://logitrustvoyages.com/logitrustblog/wp-content/uploads/2020/07/street_food.jpeg",
+    })
+  );
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const objects = JSON.parse(this.responseText);
+      Swal.fire(objects["message"]);
+      loadTable();
+    }
+  };
+}
+}
+
+//Edit box
+function showUserEditBox(id) {
+  console.log(id);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", `http://localhost:3000/food/${id}`);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const objects = JSON.parse(this.responseText);
+      console.log(objects);
+      Swal.fire({
+        title: "Edit Menu",
+        html:
+          '<input id="id" type="hidden" value="' +
+          objects[`${id}`] +
+          '">' +
+          '<label>FoodName</label><input id="FoodName" class="col-xs-2" placeholder="" value="' +
+          objects["FoodName"] +
+          '"><br><br>' +
+          '<label>FoodType</label><select name="country" id="FoodType" style="width:160px"><option value="Veg">Veg</option><option value="Non-Veg">Non-Veg</option><option value="IceCreams">IceCreams</option><option value="Snacks">Snacks</option><option value="other">other</option>' +
+          objects["FoodType"] +
+          '"</select><br><br>' +
+          '<label>Category</label><select name="country" id="Category" style="width:160px"><option value="SouthIndian">SouthIndian</option><option value="NorthIndian">NorthIndian</option><option value="Chinesh">Chinesh</option><option value="French">French</option><option value="other">other</option>'+
+          objects["Category"] +
+          '"</select><br>'+
+          '<br><label>AvailableTime</label><br><input id="AvailableTime" type=time class="swal2-input" value="' +
+          objects["AvailableTime"] +
+          '">' +
+          
+          '<br><br><label>Cost</label><input id="Cost" class="col-xs-2" placeholder="" value="' +
+          objects["Cost"] +
+          '">',
+        preConfirm: () => {
+          
+          userEdit(id);
+        },
+      });
+    }
+  };
+}
+
+function userEdit(id) {
+  const FoodName = document.getElementById("FoodName").value;
+  const FoodType = document.getElementById("FoodType").value;
+  const Category = document.getElementById("Category").value;
+  const AvailableTime = document.getElementById("AvailableTime").value;  
+  const Cost = document.getElementById("Cost").value;
+  if(validate()==true){
+    const xhttp = new XMLHttpRequest();
+  xhttp.open("PUT", `http://localhost:3000/food/${id}`);
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.send(
+    JSON.stringify({
+      FoodName: FoodName,
+      FoodType: FoodType,
+      Category: Category,
+      AvailableTime: AvailableTime,      
+      Cost:Cost,
+      image: "https://logitrustvoyages.com/logitrustblog/wp-content/uploads/2020/07/street_food.jpeg",
+    })
+  );
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const objects = JSON.parse(this.responseText);
+      Swal.fire(objects["message"]);
+      loadTable();
+    }
+  };
+}
+}
+//Delete box
+function userDelete(id) {
+  console.log(id);
+  const xhttp = new XMLHttpRequest();
+  xhttp.open(`DELETE`, `http://localhost:3000/food/${id}`);
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+          xhttp.send(
+              JSON.stringify({
+                id: id,
+              })
+            );
+            xhttp.onreadystatechange = function () {
+              if (this.readyState == 4) {
+               loadTable();
+        }
+      };
+  }
+    });
+    }
+//validate function
+    function validate(){
+  const FoodName = document.getElementById("FoodName").value;
+  const FoodType = document.getElementById("FoodType").value;
+  const AvailableTime = document.getElementById("AvailableTime").value;
+  const Category = document.getElementById("Category").value;
+  const Cost = document.getElementById("Cost").value;
+  //regular expression
+  const nameCheck=/^[a-zA-Z\s]{2,32}$/;
+const costCheck=/^\d{0,8}[.]?\d{1,4}$/;
+//condition
+
+if (FoodName == "" || FoodType == "" || AvailableTime == "" || Category == "" || Cost == "") {
+  Swal.fire({
+      title: "Fields should not be empty",
+      showConfirmButton: true,
+      icon: "error"
+  })
+  return false;
+}
+
+if (!FoodName.match(nameCheck)) {
+
+  Swal.fire({
+      title: "Invalid Input",
+      text: "Food name should only contain alphabetical letters",
+      icon: "error",
+      showConfirmButton: true,
+
+  })
+  return false;
+
+}
+if (!Cost.match(costCheck)) {
+
+  Swal.fire({
+      title: "Invalid Input",
+      text: "Cost should only contain numbers",
+      icon: "error",
+      showConfirmButton: true,
+
+  })
+  return false;
+
+}
+if (FoodName.match(nameCheck) && Cost.match(costCheck)) {
+  Swal.fire({
+      title: "Successfully Created",
+      icon: "success",
+      showConfirmButton: true
+
+  })
+  return true;
+}
+  }
+  </script>
 </head>
+
 <body>
-  <!--Header-->
-    <header>
-        <nav>
-            <h2><i class="fas fa-campground"></i> AVIS</h2>
-          <ul class="nav-links">
-            <li><a href="http://127.0.0.1:5500/mess.html">Home</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-          <a href="http://127.0.0.1:5500/login.html" class="cta-btn">Sign Out</a>
-        </nav>
-    </header>
-    <!--Content Cards-->
-        <section class="products">
-            <div class="product-card">
-              <img src="assets/download (1).jpg" alt="Product 1">
-              <h3>Iphone 14 - 4GB 128GB</h3>
-              <p>Rs. 74,900</p>
-              <a href="#" class="btn">Add to Cart</a>
-            </div>
-          
-            <div class="product-card">
-              <img src="assets/download (2).jpg" alt="Product 2">
-              <h3>Vivo Y73 8GB 128GB</h3>
-              <p>RS. 14,999</p>
-              <a href="#" class="btn">Add to Cart</a>
-            </div>
-          
-            <div class="product-card">
-              <img src="assets/images (2).jpg" alt="Product 3">
-              <h3>Nokia 7 Plus</h3>
-              <p>Rs. 7,999</p>
-              <a href="#" class="btn">Add to Cart</a>
-            </div>
-            <div class="product-card">
-                <img src="assets/download (3).jpg" alt="Product 3">
-                <h3>Oppo K3</h3>
-                <p>Rs. 8,999</p>
-                <a href="#" class="btn">Add to Cart</a>
-              </div>
-              <div class="product-card">
-                <img src="assets/images (3).jpg" alt="Product 3">
-                <h3>Redmi 9a</h3>
-                <p>Rs. 9,999</p>
-                <a href="#" class="btn">Add to Cart</a>
-              </div>
-          </section>
-          <section class="products">
-            <div class="product-card">
-              <img src="assets/apple.jpg" alt="Product 1">
-              <h3>Apple Watch</h3>
-              <p>Rs. 34,900</p>
-              <a href="#" class="btn">Add to Cart</a>
-            </div>
-          
-            <div class="product-card">
-              <img src="assets/titan.jpg" alt="Product 2">
-              <h3>Titan Watches</h3>
-              <p>RS. 11,991</p>
-              <a href="#" class="btn">Add to Cart</a>
-            </div>
-          
-            <div class="product-card">
-              <img src="assets/rolex.jpg" alt="Product 3">
-              <h3>Rolex</h3>
-              <p>Rs. 21,999</p>
-              <a href="#" class="btn">Add to Cart</a>
-            </div>
-            <div class="product-card">
-                <img src="assets/luxary.jpg" alt="Product 3">
-                <h3>Rolex & Luxary</h3>
-                <p>Rs. 27,999</p>
-                <a href="#" class="btn">Add to Cart</a>
-              </div>
-              <div class="product-card">
-                <img src="assets/rose.jpg" alt="Product 3">
-                <h3>Rolex Rose Gold</h3>
-                <p>Rs. 32,999</p>
-                <a href="#" class="btn">Add to Cart</a>
-              </div>
-          </section>
-          <div class="container">
-            <a href="http://127.0.0.1:5500/mess.html"><button class="btn btn-info">&larr; Previous</button></a>
-            <a href="http://127.0.0.1:5500/appsecond.html"><button class="btn btn-info">Next &rarr;</button></a>
-          </div> 
-          <!--Footer-->
-    <footer>
-        <p>&copy; 2023 Your Company. All rights reserved.</p>
-    </footer>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <header>
+    <nav>
+        <h2><i class="fas fa-campground"></i> AVIS</h2>
+      <ul class="nav-links">
+        <li><a href="http://127.0.0.1:5500/mess.html">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <a href="http://127.0.0.1:5500/login.html" class="cta-btn">Sign Out</a>
+    </nav>
+</header>
+  <div class="container">
+    <h2 class="mt-5 mb-3">Food-Menu</h2>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <div class="input-group">
+          <input type="text" id="searchvalue" class="form-control" placeholder="Search by Food Name">
+          <button type="button" class="btn btn-primary" onclick="search()">Search</button>
+        </div>
+      </div>
+      <div class="col-md-6 text-end">
+        <button type="button" class="btn btn-success" onclick="showUserCreateBox()">Add Food</button>
+      </div>
+    </div>
+    <div id="mycards" class="row"></div>
+  </div>
+  <div class="container">
+    <a href="http://127.0.0.1:5500/app.html"><button class="btn btn-info">&larr; Previous</button></a>
+    <a href="http://127.0.0.1:5500/appsecond.html"><button class="btn btn-info">Next &rarr;</button></a>
+  </div> 
+  <footer>
+    <p>&copy; 2023 Your Company. All rights reserved.</p>
+</footer>
+  <script src="https://kit.fontawesome.com/d509f79d02.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
+
 </html>
