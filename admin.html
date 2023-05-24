@@ -146,13 +146,7 @@
         function login() {
             var username = document.getElementById("login-username").value;
             var password = document.getElementById("login-password").value;
-
-            var users = JSON.parse(localStorage.getItem("users")) || [];
-
-            var user = users.find(function(user) {
-                return user.username === username && user.password === password;
-            });
-            if (user) {
+            if (username=='SivaBharath' && password=='Siva@123') {
                 alert("Login successful!");
                 window.location = "http://127.0.0.1:5500/app.html";
                 clearLoginForm();
