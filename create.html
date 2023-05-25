@@ -4,6 +4,8 @@
   <title>Create &bull; AVIS</title>
   <link rel="icon" type="image/x-icon" href="assets/camp.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
   <style>
     body {
       background-color: #555;
@@ -66,68 +68,83 @@
   </style>
   <script>
         function createAccount() {
-      var username = document.getElementById("create-username").value;
-      var password = document.getElementById("create-password").value;
-      var confirm = document.getElementById("create-confirmpassword").value;
-      // Regular expression 
-      var usernameRegex = /^[a-zA-Z0-9]+$/; 
-      var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#])[A-Za-z\d@$#]{6,15}$/;
-      if (username === "") {
-        alert("Username is required.");
-        return;
-      }
-      if (!username.match(usernameRegex)) {
-        alert("Username must contain only alphanumeric characters.");
-        return;
-      }
-      if (password === "") {
-        alert("Password is required.");
-        return;
-      }
-      if(!password.match(passRegex)){
-        alert("Password must be at least 6 characters long and contain a combination of special characters.");
-        return;
-      }
-      if (password !== confirm) {
-        alert("Passwords do not match. Please enter matching passwords.");
-        return;
-      }
+  var username = document.getElementById("create-username").value;
+  var password = document.getElementById("create-password").value;
+  var confirm = document.getElementById("create-confirmpassword").value;
+  // Regular expression 
+  var usernameRegex = /^[a-zA-Z0-9]+$/; 
+  var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#])[A-Za-z\d@$#]{6,15}$/;
 
-      // Read the existing JSON data from localStorage or initialize an empty array
-      var users = JSON.parse(localStorage.getItem("users")) || [];
+  if (username === "") {
+    showError('Username is required');
+    return;
+  }
+  if (!username.match(usernameRegex)) {
+    showError('Username must contain only characters');
+    return;
+  }
+  if (password === "") {
+    showError('Password is required');
+    return;
+  }
+  if (!password.match(passRegex)) {
+    showError('Password must contain 6 characters with the combination of special characters');
+    return;
+  }
+  if (password !== confirm) {
+    showError('Password and Confirm Password must match');
+    return;
+  }
 
-      // Check if the username already exists
-      var existingUser = users.find(function (user) {
-        return user.username === username;
-      });
+  // Read the existing JSON data from localStorage or initialize an empty array
+  var users = JSON.parse(localStorage.getItem("users")) || [];
 
-      if (existingUser) {
-        alert("Username already exists. Please choose a different username.");
-        return;
-      }
+  // Check if the username already exists
+  var existingUser = users.find(function (user) {
+    return user.username === username;
+  });
 
-      // Create a new user object
-      var newUser = {
-        username: username,
-        password: password
-      };
+  if (existingUser) {
+    showError('Username already exists. Please choose a different username.');
+    return;
+  }
 
-      // Add the new user to the array
-      users.push(newUser);
+  // Create a new user object
+  var newUser = {
+    username: username,
+    password: password
+  };
 
-      // Save the updated array to localStorage
-      localStorage.setItem("users", JSON.stringify(users));
+  // Add the new user to the array
+  users.push(newUser);
 
-      alert("Account created successfully!");
-      window.location="http://127.0.0.1:5500/index.html";
-      clearCreateForm();
-    }
+  // Save the updated array to localStorage
+  localStorage.setItem("users", JSON.stringify(users));
+  clearCreateForm();
 
-    function clearCreateForm() {
-      document.getElementById("create-username").value = "";
-      document.getElementById("create-password").value = "";
-      document.getElementById("create-confirmpassword").value = "";
-    }
+  Swal.fire({
+    icon: 'success',
+    title: 'Account created successfully',
+    showConfirmButton: true,
+    confirmButtonText: 'OK'
+  });
+}
+
+function showError(errorMessage) {
+  Swal.fire({
+    icon: 'error',
+    title: errorMessage,
+    showConfirmButton: true,
+    confirmButtonText: 'OK'
+  });
+}
+
+function clearCreateForm() {
+  document.getElementById("create-username").value = "";
+  document.getElementById("create-password").value = "";
+  document.getElementById("create-confirmpassword").value = "";
+}
+
   </script>
 </head>
 <body>

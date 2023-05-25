@@ -159,7 +159,7 @@
         <nav>
             <h2><i class="fas fa-campground"></i> AVIS</h2>
           <ul class="nav-links">
-            <li><a href="http://127.0.0.1:5500/mess.html">Home</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html">Home</a></li>
             <li><a href="#">Shop</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
@@ -235,11 +235,11 @@ buyButtons.forEach(function (buyButton) {
         '</div>' +
         '<div class="swal-input-group">' +
         '<label for="payment">Payment Method:</label>' +
-        '<div>' +
+        '<div class="swal-input-radio">' +
         '<input type="radio" id="upiPayment" name="payment" value="upipayment" required>' +
         '<label for="upiPayment">UPI Payment</label>' +
         '</div>' +
-        '<div>' +
+        '<div class="swal-input-radio">' +
         '<input type="radio" id="cashOnDelivery" name="payment" value="cashondelivery" required>' +
         '<label for="cashOnDelivery">Cash on Delivery</label>' +
         '</div>' +
@@ -251,15 +251,39 @@ buyButtons.forEach(function (buyButton) {
       preConfirm: () => {
         const quantity = document.getElementById('quantity').value;
         const selectedOption = document.querySelector('input[name="payment"]:checked');
-        
+
         if (!quantity) {
           Swal.showValidationMessage('Please enter the number of quantity');
         }
         if (!selectedOption) {
           Swal.showValidationMessage('Please select a payment method');
         }
-        
+
         return selectedOption ? selectedOption.value : null;
+      },
+      didOpen: () => {
+        // Add custom styles to the Swal dialog box for better alignment
+        const modalContainer = Swal.getContainer();
+        modalContainer.style.display = 'flex';
+        modalContainer.style.flexDirection = 'column';
+        modalContainer.style.alignItems = 'flex-start';
+
+        modalContainer.querySelector('.swal2-content').style.textAlign = 'left';
+        modalContainer.querySelectorAll('.swal-input-group').forEach((group) => {
+          group.style.display = 'flex';
+          group.style.alignItems = 'center';
+          group.style.marginBottom = '10px';
+        });
+        modalContainer.querySelectorAll('.swal-input-group label').forEach((label) => {
+          label.style.width = '100px';
+          label.style.marginRight = '10px';
+        });
+        modalContainer.querySelector('input[type="number"]').style.flex = '1';
+        modalContainer.querySelectorAll('.swal-input-radio').forEach((radio) => {
+          radio.style.display = 'flex';
+          radio.style.alignItems = 'center';
+          radio.style.marginBottom = '10px';
+        });
       }
     }).then((result) => {
       if (result.isConfirmed) {
@@ -294,6 +318,25 @@ buyButtons.forEach(function (buyButton) {
                 upiId: upiId || null,
                 amount: amount || null
               };
+            },
+            didOpen: () => {
+              // Add custom styles to the Swal dialog box for better alignment
+              const modalContainer = Swal.getContainer();
+              modalContainer.style.display = 'flex';
+              modalContainer.style.flexDirection = 'column';
+              modalContainer.style.alignItems = 'flex-start';
+
+              modalContainer.querySelector('.swal2-content').style.textAlign = 'left';
+              modalContainer.querySelectorAll('.swal-input-group').forEach((group) => {
+                group.style.display = 'flex';
+                group.style.alignItems = 'center';
+                group.style.marginBottom = '10px';
+              });
+              modalContainer.querySelectorAll('.swal-input-group label').forEach((label) => {
+                label.style.width = '100px';
+                label.style.marginRight = '10px';
+              });
+              modalContainer.querySelector('input[type="text"]').style.flex = '1';
             }
           }).then((result) => {
             if (result.isConfirmed) {
