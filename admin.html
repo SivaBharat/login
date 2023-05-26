@@ -15,8 +15,8 @@
         body {
             background-color: #555;
             background: #555;
-            background: -webkit-linear-gradient(to right,  #555,  #555);
-            background: linear-gradient(to right,  #555,  #555);
+            background: -webkit-linear-gradient(to right, #555, #555);
+            background: linear-gradient(to right, #555, #555);
         }
 
         .form-container {
@@ -52,23 +52,44 @@
             padding: 10px;
         }
 
-        .footer-menu li {
-            display: inline-block;
-            margin-right: 10px;
-        }
+        footer {
+        background-color: #555;
+        padding: 20px 0;
+    }
 
-        .social-icons a {
-            color: #f9f9f9;
-            margin-left: 250px;
-        }
+    .footer-menu {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-menu li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    .footer-menu li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .social-icons {
+        text-align: center;
+    }
+
+    .social-icons a {
+        margin: 0 10px;
+        color: #fff;
+        font-size: 20px;
+    }
 
         a {
             color: rgb(251, 250, 250);
             text-decoration: none;
         }
 
-        p{
-            margin-left: 360px;
+        p {
+            text-align: center;
             color: #f9f9f9;
         }
 
@@ -79,11 +100,11 @@
                 margin-top: 50px;
             }
 
-            .social-icons a {
+            .social-icons {
                 margin-left: 0;
             }
 
-            p{
+            p {
                 margin-left: 0;
             }
         }
@@ -114,19 +135,10 @@
     <footer>
         <div class="container">
             <ul class="footer-menu">
-                <li><a href="#">Meta</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Jobs</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="#">Api</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Terms</a></li>
-                <li><a href="#">Top Accounts</a></li>
-                <li><a href="#">Locations</a></li>
-                <li><a href="#">Instagram Lite</a></li>
-                <li><a href="#">Contact Uploading & Non-Users</a></li>
-                <li><a href="#">Meta Verified</a></li>
+                <li><a href="http://127.0.0.1:5500/about.html"><h5>About</h5></a></li>
+                <li><a href="http://127.0.0.1:5500/contact.html"><h5>Contact</h5></a></li>
+                <li><a href="http://127.0.0.1:5500/career.html"><h5>Careers</h5></a></li>
+                <li><a href="http://127.0.0.1:5500/help.html#troubleshooting"><h5>Help</h5></a></li>
             </ul>
             <div class="social-icons">
                 <a href="https://www.facebook.com/login/"><i class="fab fa-facebook"></i></a>
@@ -134,9 +146,9 @@
                 <a href="https://www.instagram.com/accounts/login/"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
-        <div class="container">
-            <a href="#"><img src="assets/c5Rp7Ym-Klz.png" alt="" width="150px" style="margin-left: 370px;margin-top: 30px;"></a>
-            <a href="#"><img src="assets/EHY6QnZYdNX.png" alt="" width="120px" style="margin-top: 30px;"></a>
+        <div class="container text-center">
+            <a href="#"><img src="assets/c5Rp7Ym-Klz.png" alt="" width="190px"></a>
+            <a href="#"><img src="assets/EHY6QnZYdNX.png" alt="" width="160px"></a>
         </div>
         <!--Copy right-->
         <div class="container">
@@ -148,34 +160,35 @@
         function login() {
             var username = document.getElementById("login-username").value;
             var password = document.getElementById("login-password").value;
-            if (username=='SivaBharath' && password=='Siva@123') {                
+            if (username == 'SivaBharath' && password == 'Siva@123') {
                 function showSuccessMessage() {
-    Swal.fire({
-      icon: 'success',
-      title: 'Login Successfully',
-      showConfirmButton: true,
-      confirmButtonText: 'OK'
-    }).then(function(){
-        window.location.href = "http://127.0.0.1:5500/app.html";
-    });
-  }
-  showSuccessMessage();
-      }else {
-function showError(){
-Swal.fire({
-    icon:'error',
-    title:'Invalid username or password',
-    showConfirmButton:'true',
-    confirmButtonText:'OK'
-});
-}
-showError();           
- }
-        
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Login Successfully',
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK'
+                    }).then(function () {
+                        window.location.href = "http://127.0.0.1:5500/app.html";
+                    });
+                }
+                showSuccessMessage();
+            } else {
+                function showError() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid username or password',
+                        showConfirmButton: true,
+                        confirmButtonText: 'OK'
+                    });
+                }
+                showError();
+            }
+        }
+
         function clearLoginForm() {
             document.getElementById("login-username").value = "";
             document.getElementById("login-password").value = "";
-        }} 
+        }
     </script>
 </body>
 
