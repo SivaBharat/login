@@ -272,71 +272,129 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-const cartIcon = document.querySelector('.cart-icon');
+ const cartIcon = document.querySelector('.cart-icon');
 const cartDropdown = document.querySelector('.cart-dropdown');
 const addToCartBtns = document.querySelectorAll('.add-to-cart');
 const emptyCartMsg = document.querySelector('.empty-cart-msg');
 const cartItemCount = document.querySelector('.count');
+const orderBtn = document.querySelector('.order-btn');
+const cartDetailsDiv = document.querySelector('.cart-dropdown');
 
 let cartCount = 0;
-let totalPrice = 0;
+let cartItems = [];
 
 cartIcon.addEventListener('click', () => {
-  if (cartCount === 0) {
+  if (cartItems.length === 0) {
     Swal.fire('Your Cart is Empty');
   } else {
-    const message = `You have selected ${cartCount} item(s) and your cart value is ${totalPrice} rupees.`;
-    Swal.fire({
-      title: 'Cart Details',
-      text: message,
-      icon: 'info',
-    });
+    cartDropdown.classList.toggle('active');
   }
 });
 
 addToCartBtns.forEach((btn) => {
   btn.addEventListener('click', () => {
-    cartCount++;
-    cartItemCount.textContent = cartCount;
+    const productCard = btn.closest('.product-card');
+    const productName = productCard.querySelector('h3').textContent;
+    const productPrice = parseFloat(productCard.querySelector('p').textContent.slice(1));
+    const productImage = productCard.querySelector('img').src;
 
-    const productPrice = Number(btn.previousElementSibling.textContent.slice(1));
-    const productName = btn.parentElement.querySelector('h3').textContent;
-
-    totalPrice += productPrice;
-
-    const swalOptions = {
-      title: 'Select Payment Method',
-      html: `
-        <select id="payment-method" class="swal2-input">
-          <option value="credit-card">Credit Card</option>
-          <option value="paytm">Paytm</option>
-          <option value="Cash on delivery">Cash on delivery</option>
-        </select>
-      `,
-      showCancelButton: true,
-      confirmButtonText: 'Submit',
-      cancelButtonText: 'Cancel',
-      preConfirm: () => {
-        const paymentMethod = document.getElementById('payment-method').value;
-        return paymentMethod;
-      },
+    const item = {
+      name: productName,
+      price: productPrice,
+      image: productImage,
     };
 
-    Swal.fire(swalOptions).then((result) => {
-      if (result.isConfirmed) {
-        const paymentMethod = result.value;
-        Swal.fire({
-          title: 'Purchase Successful',
-          html: `Thank you for your purchase!<br>You have paid $${totalPrice.toFixed(2)} with ${paymentMethod}.`,
-          icon: 'success',
-        });
-      } else {
-        Swal.fire('Payment Canceled', '', 'error');
-      }
-    });
+    cartItems.push(item);
+    updateCartCount();
+    updateCartDetails();
   });
 });
 
-</script>
+function removeFromCart(index) {
+  cartItems.splice(index, 1); // Remove the item from the cart items array
+  updateCartCount();
+  updateCartDetails();
+}
+
+function updateCartCount() {
+  cartItemCount.textContent = cartItems.length; // Update the cart count
+}
+
+function calculateTotalPrice() {
+  let total = 0;
+  cartItems.forEach((item) => {
+    total += item.price;
+  });
+  return total.toFixed(2);
+}
+
+function generateCartDetailsHtml() {
+  let cartDetailsHtml = '<div class="cart-details">';
+  cartItems.forEach((item, index) => {
+    const { name, price, image } = item;
+    cartDetailsHtml += `
+      <div class="cart-item">
+        <img src="${image}" alt="${name}" width="50" height="50">
+        <div>
+          <h4>${name}</h4>
+          <p>$${price.toFixed(2)}</p>
+          <button class="btn remove-btn" onclick="removeFromCart(${index})">Remove</button>
+        </div>
+      </div>
+    `;
+  });
+
+  if (cartItems.length > 0) {
+    cartDetailsHtml += `
+      <button class="btn order-btn" onclick="askPaymentMethod()">Order Now</button>
+    `;
+  } else {
+    cartDetailsHtml += '<div class="empty-cart-msg">Your cart is empty.</div>';
+  }
+
+  cartDetailsHtml += '</div>';
+
+  return cartDetailsHtml;
+}
+
+function updateCartDetails() {
+  const cartDetailsHtml = generateCartDetailsHtml();
+  cartDetailsDiv.innerHTML = cartDetailsHtml;
+  orderBtn.style.display = cartItems.length > 0 ? 'block' : 'none';
+}
+
+function askPaymentMethod() {
+  const totalAmount = calculateTotalPrice();
+
+  Swal.fire({
+    title: 'Select Payment Method',
+    html: `
+      <select id="payment-method" class="swal2-input">
+        <option value="credit-card">Credit Card</option>
+        <option value="paytm">Paytm</option>
+        <option value="cash-on-delivery">Cash on Delivery</option>
+      </select>
+      <p>Total Amount: $${totalAmount}</p>
+    `,
+    showCancelButton: true,
+    confirmButtonText: 'Submit',
+    cancelButtonText: 'Cancel',
+    preConfirm: () => {
+      const paymentMethod = document.getElementById('payment-method').value;
+      placeOrder(paymentMethod);
+    },
+  });
+}
+
+function placeOrder(paymentMethod) {
+  // Logic to place the order using the selected payment method
+  Swal.fire(`Order Placed! Payment method: ${paymentMethod}`);
+  cartItems = []; // Empty the cart after placing the order
+  updateCartCount();
+  updateCartDetails();
+}
+
+
+    </script>
 </body>
 </html>
